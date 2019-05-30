@@ -1,0 +1,20 @@
+div#mws-header
+{
+    border-color:#c5d52b;
+}
+div#mws-themer
+{
+    position:fixed;
+    width:auto;
+    bottom:0;
+    right:0;
+    font-size:12px;
+    z-index:3;
+    height:48px;
+}
+.clearfix {
+    display: inline-block;
+}
+.clearfix {
+    display: block;
+}

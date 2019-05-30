@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>
+        *{margin: 0; padding: 0; margin: 0 auto;}
+        .a{text-decoration:none;color:black}
+        a:link {color: black;text-decoration: none;}
+    </style>
+</head>
+<body>
+<a target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=awcAGB8EGRIrGhpFCAQG" style="text-decoration:none;">
+    <img src="http://rescdn.qqmail.com/zh_CN/htmledition/images/function/qm_open/ico_mailme_01.png"/></a>
+<canvas id="clock" disable-scroll='true' ></canvas>
+</body>
+<script type="text/javascript" charset="utf-8">
+    var w = window.innerWidth;
+    var h = window.innerHeight-10;
+
+    function background(){
+        let canvas = document.getElementById("clock");
+        let clock = canvas.getContext("2d");
+        canvas.width=w;
+        canvas.height=h;
+
+        var xsize=1000;
+        var myDate = new Date(),
+            m=myDate.getMonth(),
+            d=myDate.getDate(),
+            wk=myDate.getDay(),
+            hh=myDate.getHours(),
+            mm=myDate.getMinutes(),
+            ss=myDate.getSeconds();
+        var mun=["〇","一","二","三","四","五","六","七","八","九","十","十一","十二","十三","十四","十五","十六","十七","十八","十九","二十","二十一","二十二","二十三","二十四","二十五","二十六","二十七","二十八","二十九","三十","三十一","三十二","三十三","三十四","三十五","三十六","三十七","三十八","三十九","四十","四十一","四十二","四十三","四十四","四十五","四十六","四十七","四十八","四十九","五十","五十一","五十二","五十三","五十四","五十五","五十六","五十七","五十八","五十九","〇"];
+        var week=["星期一","星期二","星期三","星期四","星期五","星期六","星期天"];
+        var crx=w/2,cry=h/2,r0=10,r1=w;
+        var clockpx=w/2,clockpy=h/2;
+        var colorss=["#9400D3","#4B0082","#00008B","#3CB371","#556B2F",
+            "#8B4513","#000000","#DC143C","#8B0000","#006400"];
+        var colori=Math.floor(Math.random()*10);
+        var colorb=0,mouseb=0;
+        clock.font="18px 黑体";
+        //月   日  星期  时   分    秒
+        var hx=9;
+        var Rx=[65, 120, 190, 255, 335, 415];
+        canvas.addEventListener('click',function(e) {mouseb=mouseb<5?mouseb+1:0;});
+        canvas.addEventListener('mousemove',
+            function(e){
+                if(mouseb==4){
+                    crx=clockpx=e.offsetX;
+                    cry=clockpy=e.offsetY;
+                }
+            });
+        window.addEventListener('mousewheel',
+            function(e){
+                if(mouseb==4){
+                    xsize += e.wheelDelta;
+                }
+            });
+        function drowbackground(){
+            var grd=clock.createRadialGradient(crx,cry,r0,crx,cry,r1);
+            grd.addColorStop(0,colorss[colori]);
+            grd.addColorStop(1,"#000");
+            clock.fillStyle = grd;
+            clock.fillRect(0,0,w,h);
+            clock.translate(clockpx, clockpy);
+            clock.fillStyle = "#bbb";
+            clock.strokeStyle = "#fff";
+        }
+        function drowclock(){
+            clock.save();
+            clock.rotate(30*(m+1)*Math.PI/180);
+            for(var i=1;i<13;i++){
+                clock.rotate(-30*Math.PI/180);
+                if(i!=m+1){clock.fillText(mun[i]+"月",Rx[0],hx);}
+                else{clock.strokeText(mun[i]+"月",Rx[0],hx);}
+            }
+            clock.restore();
+            clock.save();
+            clock.rotate(11.6*(d)*Math.PI/180);
+            for(var i=1;i<32;i++){
+                clock.rotate(-11.6*Math.PI/180);
+                if(i!=d){clock.fillText(mun[i]+"号",Rx[1],hx);}
+                else{clock.strokeText(mun[i]+"号",Rx[1],hx);}
+            }
+            clock.restore();
+            clock.save();
+            clock.rotate(51.4*wk*Math.PI/180);
+            for(var i=0;i<7;i++){
+                clock.rotate(-51.4*Math.PI/180);
+                if(i!=wk-1){clock.fillText(week[i],Rx[2],hx);}
+                else{clock.strokeText(week[i],Rx[2],hx);}
+            }
+            clock.restore();
+            clock.save();
+            clock.rotate(15*(hh+1)*Math.PI/180);
+            for(var i=0;i<24;i++){
+                clock.rotate(-15*Math.PI/180);
+                if(i!=hh){clock.fillText(mun[i]+"点",Rx[3],hx);}
+                else{clock.strokeText(mun[i]+"点",Rx[3],hx);}
+            }
+            clock.restore();
+            clock.save();
+            clock.rotate(6*(mm+1)*Math.PI/180);
+            for(var i=0;i<60;i++){
+                clock.rotate(-6*Math.PI/180);
+                if(i!=mm){clock.fillText(mun[i]+"分",Rx[4],hx);}
+                else{clock.strokeText(mun[i]+"分",Rx[4],hx);}
+            }
+            clock.restore();
+        }
+        function drowss(){
+            for(var i=0;i<60;i++){
+                clock.save();
+
+                if(ss-parseInt(ss)>0.5){
+                    clock.rotate(-6*(i-ss)*Math.PI/180);}
+                else{
+                    clock.rotate(-6*(i-parseInt(ss))*Math.PI/180);}
+                if((i>ss-0.5)&&(i<ss+0.3)){
+                    clock.strokeText(mun[i]+"秒",Rx[5],hx);}
+                else{
+                    clock.fillText(mun[i]+"秒",Rx[5],hx);}
+                clock.restore();
+            }
+            clock.translate(-clockpx,-clockpy);
+        }
+        setInterval(function(){
+            if(mm>=59){
+                var myDate = new Date();
+                m=myDate.getMonth(); d=myDate.getDate(); wk=myDate.getDay();
+                hh=myDate.getHours();mm=myDate.getMinutes();
+            }
+            ss+=0.2;
+            mm=ss>=60?mm+1:mm;
+            hh=mm>=60?hh+1:hh;
+            ss=ss<60?ss:0;
+            mm=mm<60?mm:0;
+            hh=hh<24?hh:0;
+            mouseb=(ss%3==0&&mouseb!=4)?0:mouseb;
+            drowbackground();
+            clock.save();
+            clock.scale(Math.min(window.innerWidth, window.innerHeight) / xsize,Math.min(window.innerWidth, window.innerHeight) / xsize);
+            drowclock();
+            drowss();
+            clock.restore();
+            clock.translate(-clockpx,-clockpy);
+        },200);
+    }
+    background();
+</script>
+</html>
