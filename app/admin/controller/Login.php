@@ -135,7 +135,7 @@ class Login extends BaseController
     public function  log($uid)
     {
 
-        $ip     = "180.163.220.66";
+        $ip     = $this->getIp();
         $city   = $this->getCity($ip);
         $chrome = $this->getBrowser();
         $time   = date("Y-m-d H:i:s");
