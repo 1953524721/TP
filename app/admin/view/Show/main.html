@@ -8,6 +8,12 @@
     <link rel="stylesheet" type="text/css" href="__PUBLIC__/bootstrap.css">
     <link rel="stylesheet" href="__PUBLIC__/admin/show/main/css/main.css">
     <link rel="stylesheet" href="__PUBLIC__/admin/show/main/css/style.css">
+    <style>
+        .role{
+        position: absolute;
+        left: 280px;
+            top:40px;}
+    </style>
 </head>
 <body>
 <div id="loading">
@@ -19,11 +25,17 @@
 <div id="wrapper">
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="brand"> <a href="index.html"><img src="__PUBLIC__/admin/show/main/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a> </div>
+        <div class="brand">
+            <a href="index.html"><img src="__PUBLIC__/admin/show/main/img/logo-dark.png" alt="Klorofil Logo" class="img-responsive logo"></a>
+        </div>
         <div class="container-fluid">
             <div class="navbar-btn" style="padding: 0; padding-top: 10px;">
                 <button type="button" class="btn-toggle-fullwidth btn-toggle-mx"><img src="__PUBLIC__/admin/show/main/img/left.png" height="40px" alt=""></button>
             </div>
+        </div>
+        <div class="role">
+           <span>当前角色 ：{$role}</span><br>
+           <span>用户名   ：{$User}</span>
         </div>
     </nav>
     <!-- END NAVBAR -->
@@ -34,7 +46,7 @@
             <nav>
                 <ul class="nav">
                     <li><a href="__PUBLIC__/admin/show/main/link/1/index.html" target="_blank" class="iframe_link active"><span>选择器</span></a></li>
-                    <li><a href="__PUBLIC__/admin/show/main/link/2/index.html" target="_blank" class="iframe_link"><span>层次选择器</span></a></li>
+                   <li><a href="__PUBLIC__/admin/show/main/link/2/index.html" target="_blank" class="iframe_link"><span>层次选择器</span></a></li>
                     <li>
                         <a href="javascript:;" class="nav-togg"> <span>搭建方法</span> </a>
                         <div>
